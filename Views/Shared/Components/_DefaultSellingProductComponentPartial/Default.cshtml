@@ -1,0 +1,89 @@
+﻿@model List<FoodMartMongo.Dtos.ProductDtos.ResultProductDto>
+
+<section class="py-5 overflow-hidden">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-header d-flex flex-wrap justify-content-between my-5">
+                    <h2 class="section-title">Düşük Fiyatlı ürünler</h2>
+                    <div class="d-flex align-items-center">
+                        <a href="#allproducts" class="btn-link text-decoration-none">Tüm Ürünleri Gör →</a>
+                        <div class="swiper-buttons">
+                            <button class="swiper-prev products-carousel-prev btn btn-primary">❮</button>
+                            <button class="swiper-next products-carousel-next btn btn-primary">❯</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+
+                    <div class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+
+                        @foreach(var product in Model)
+                        {
+                            var imageUrl = product.ImageUrl.StartsWith("/")
+                                ? product.ImageUrl
+                                : "/foodmart-1.0.0/images/" + product.ImageUrl;
+
+                            <div class="col">
+                                <div class="product-item position-relative">
+                                    @if(product.StockCount > 0)
+                                    {
+                                        <span class="badge bg-success position-absolute m-3">Stokta</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger position-absolute m-3">Stokta Değil</span>
+                                    }
+
+                                    <a href="#" class="btn-wishlist"><svg width="24" height="24"><use xlink:href="#heart"></use></svg></a>
+                                    <figure>
+                                        <a href="#" title="@product.ProductName">
+                                            <img src="@imageUrl" class="tab-image" alt="@product.ProductName" />
+                                        </a>
+                                    </figure>
+                                    <h3>@product.ProductName</h3>
+                                    <span class="qty">1 Unit</span> 
+                                    <span class="rating">
+                                        <svg width="24" height="24" class="text-primary"><use xlink:href="#star-solid"></use></svg> 4.5
+                                    </span>
+                                         <span class="price">₺@product.ProductPrice</span>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="input-group product-qty">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-productid="@product.ProductId">
+                                                    <svg width="16" height="16"><use xlink:href="#minus"></use></svg>
+                                                </button>
+                                            </span>
+                                            <input type="text" id="quantity-@product.ProductId" name="quantity-@product.ProductId" class="form-control input-number" value="1" min="1" max="@product.StockCount" readonly />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-productid="@product.ProductId" data-max="@product.StockCount">
+                                                    <svg width="16" height="16"><use xlink:href="#plus"></use></svg>
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <a href="#" class="nav-link add-to-cart" data-productid="@product.ProductId" data-quantity="1">
+                                        Sepete ekle <iconify-icon icon="uil:shopping-cart"></iconify-icon>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+                @* Diğer tablar için de aynı mantıkla filtreleme eklenebilir. *@
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        </div>
+        </section>

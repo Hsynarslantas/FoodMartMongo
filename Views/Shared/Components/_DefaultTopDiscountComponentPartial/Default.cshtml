@@ -1,0 +1,109 @@
+﻿@model List<FoodMartMongo.Dtos.DiscountDtos.ResultDiscountDto>
+
+<section class="py-3" style="background-image: url('images/background-pattern.jpg');background-repeat: no-repeat;background-size: cover;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="banner-blocks">
+
+                    <div class="banner-ad large bg-info block-1">
+
+                        <div class="swiper main-swiper">
+                            <div class="swiper-wrapper">
+
+                                <div class="swiper-slide">
+                                    <div class="row banner-content p-5">
+                                        <div class="content-wrapper col-md-7">
+                                            <div class="categories my-3">100% Doğal</div>
+                                            <h3 class="display-4">Taze Karışım & Yaz İçecekleri</h3>
+                                            <p>İçecekler, susuzluğu gideren ve lezzet katan sıvılardır. Çeşitleri soğuk ve sıcak olarak çeşitlenir. Günlük hayatta önemli yer tutar.</p>
+                                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1 px-4 py-3 mt-3">Alışverişe Başla</a>
+                                        </div>
+                                        <div class="img-wrapper col-md-5">
+                                            <img src="/FoodMart-1.0.0/images/product-thumb-1.png" class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <div class="row banner-content p-5">
+                                        <div class="content-wrapper col-md-7">
+                                            <div class="categories mb-3 pb-3">100% Doğal</div>
+                                            <h3 class="banner-title">Taze Karışım & Yaz İçecekleri</h3>
+                                            <p>İçecekler, susuzluğu gideren ve lezzet katan sıvılardır. Çeşitleri soğuk ve sıcak olarak çeşitlenir. Günlük hayatta önemli yer tutar.</p>
+                                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">Alışverişe Başla</a>
+                                        </div>
+                                        <div class="img-wrapper col-md-5">
+                                            <img src="/FoodMart-1.0.0/images/product-thumb-1.png" class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <div class="row banner-content p-5">
+                                        <div class="content-wrapper col-md-7">
+                                            <div class="categories mb-3 pb-3">100% Doğal</div>
+                                            <h3 class="banner-title">Ketçap</h3>
+                                            <p>Ketçap, domates bazlı popüler bir sostur. Yemeklere tat ve renk katar. Genellikle tuz, sirke ve baharatlarla hazırlanır. Dünya genelinde birçok mutfakta kullanılır.</p>
+                                            <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">Alışverişe Başla</a>
+                                        </div>
+                                        <div class="img-wrapper col-md-5">
+                                            <img src="/FoodMart-1.0.0/images/product-thumb-2.png" class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-pagination"></div>
+
+                        </div>
+                    </div>
+                    @{
+                        var lastTwoDiscounts = Model.Skip(Math.Max(0, Model.Count - 2)).Take(2).ToList(); // Son 2 veriyi alıyoruz
+                        int index = 0;
+                        var pastelColors = new List<string>
+                    {
+                    "#FFD1DC", // Pastel pembe
+                    "#C7CEEA", // Pastel mavi
+                    "#FFDAC1", // Pastel şeftali
+                    "#E2F0CB", // Pastel nane
+                    "#FDDFD5"  // Pastel koral
+                    };
+                    }
+
+                    @foreach (var item in lastTwoDiscounts)
+                    {
+                        var blockClass = index % 2 == 0 ? "block-2" : "block-3";
+                        var bgPosition = index % 2 == 0 ? "right bottom" : "right top";
+                        var bgColor = pastelColors[index % pastelColors.Count];
+
+                        <div class="banner-ad @blockClass"
+                             style="background: url('/FoodMart-1.0.0/images/@item.ImageUrl') no-repeat;
+                background-color: @bgColor;
+                background-position: @bgPosition;">
+
+                            <div class="row banner-content p-5">
+                                <div class="content-wrapper col-md-7">
+                                    <div class="categories sale mb-3 pb-3">@item.DiscountRate</div>
+                                    <h3 class="banner-title">@item.Title</h3>
+                                    <a href="#allproducts" class="d-flex align-items-center nav-link">
+                                        Alışverişe Başla
+                                        <svg width="24" height="24"><use xlink:href="#arrow-right"></use></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        index++;
+                    }
+
+
+
+                </div>
+                <!-- / Banner Blocks -->
+
+            </div>
+        </div>
+    </div>
+</section>

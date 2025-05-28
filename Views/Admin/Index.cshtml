@@ -1,0 +1,76 @@
+﻿@model List<FoodMartMongo.Dtos.ProductDtos.ResultProductDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-5">Yönetici Paneli</h1>
+        <a href="@Url.Action("CreateProduct", "Admin")" class="btn btn-primary btn-lg shadow-sm">
+            <i class="bi bi-plus-circle me-2"></i>Yeni Ürün Ekle
+        </a>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded" style="background: white;">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Ürün Adı</th>
+                    <th scope="col">Stok</th>
+                    <th scope="col">Fiyat</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col" class="text-center">Sil</th>
+                    <th scope="col" class="text-center">Güncelle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.ProductId</th>
+                        <td>@item.ProductName</td>
+                        <td>@item.StockCount</td>
+                        <td>@item.ProductPrice.ToString("C")</td>
+                        <td>@item.CategoryName</td>
+                        <td class="text-center">
+                            <a href="@Url.Action("DeleteProduct", "Admin", new { id = item.ProductId })"
+                               class="btn btn-sm btn-danger"
+                               onclick="return confirm('Bu ürünü silmek istediğinize emin misiniz?');"
+                               title="Ürünü Sil">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("UpdateProduct", "Admin", new { id = item.ProductId })"
+                               class="btn btn-sm btn-success"
+                               title="Ürünü Güncelle">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .table-primary {
+        background-color: #0d6efd !important;
+        color: white;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #e9f0ff;
+        cursor: pointer;
+    }
+</style>

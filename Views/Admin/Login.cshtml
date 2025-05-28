@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/Admin/_AdminLayout.cshtml";
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr"
+      class="light-style customizer-hide"
+      dir="ltr"
+      data-theme="theme-default"
+      data-assets-path="~/sneat-1.0.0/assets/"
+      data-template="vertical-menu-template-free">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Admin Girişi | Sneat Template</title>
+
+    <link rel="icon" type="image/x-icon" href="~/sneat-1.0.0/assets/img/favicon/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/sneat-1.0.0/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="~/sneat-1.0.0/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="~/sneat-1.0.0/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="~/sneat-1.0.0/assets/css/demo.css" />
+    <link rel="stylesheet" href="~/sneat-1.0.0/assets/vendor/css/pages/page-auth.css" />
+</head>
+<body>
+
+    <div class="container-xxl">
+        <div class="authentication-wrapper authentication-basic container-p-y">
+            <div class="authentication-inner">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="app-brand justify-content-center mb-4">
+                            <a href="/" class="app-brand-link gap-2">
+                                <span class="app-brand-logo demo">
+                                    <!-- İstersen SVG logoyu buraya koyabilirsin -->
+                                    <i class='bx bx-lock-open' style="font-size:2rem; color:#696cff;"></i>
+                                </span>
+                                <span class="app-brand-text demo text-body fw-bolder">Admin Panel</span>
+                            </a>
+                        </div>
+
+                        <h4 class="mb-2 text-center">Admin Paneli Giriş Ekranı 👋</h4>
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="alert alert-danger text-center">@ViewBag.Error</div>
+                        }
+
+                        <form asp-action="Login" method="post" class="mb-3" novalidate>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Kullanıcı Adı</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="username"
+                                       name="username"
+                                       placeholder="Kullanıcı Adınızı Giriniz..."
+                                       required
+                                       autofocus />
+                            </div>
+
+                            <div class="mb-3 form-password-toggle">
+                                <div class="input-group input-group-merge">
+                                    <input type="password"
+                                           class="form-control"
+                                           name="password"
+                                           placeholder="************"
+                                           required
+                                           aria-describedby="password" />
+                                    <span class="input-group-text cursor-pointer">
+                                        <i class="bx bx-hide"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary d-grid w-100">Giriş Yap</button>
+                            </div>
+                        </form>
+
+                        <p class="text-center">
+                            <span>Hesabınız yok mu?</span>
+                            <a href="/Admin/Register">
+                                <span>Hesap Oluştur</span>
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/sneat-1.0.0/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="~/sneat-1.0.0/assets/vendor/libs/popper/popper.js"></script>
+    <script src="~/sneat-1.0.0/assets/vendor/js/bootstrap.js"></script>
+    <script src="~/sneat-1.0.0/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/sneat-1.0.0/assets/vendor/js/menu.js"></script>
+    <script src="~/sneat-1.0.0/assets/js/main.js"></script>
+
+    <script>
+        // Basit şifre görünürlüğü toggle (opsiyonel)
+        $(document).ready(function () {
+            $('.form-password-toggle .input-group-text').click(function () {
+                let input = $(this).siblings('input');
+                let icon = $(this).find('i');
+                if (input.attr('type') === 'password') {
+                    input.attr('type', 'text');
+                    icon.removeClass('bx-hide').addClass('bx-show');
+                } else {
+                    input.attr('type', 'password');
+                    icon.removeClass('bx-show').addClass('bx-hide');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
